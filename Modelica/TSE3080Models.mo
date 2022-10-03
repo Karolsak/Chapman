@@ -3,13 +3,13 @@ package TSE3080Models
   package Transformer "Examples used during the transformer lectures"
 
     model SimpleMagneticCircuit
-      extends Modelica.Magnetic.FluxTubes.Examples.SaturatedInductor;
+      extends Modelica.Magnetic.FluxTubes.Examples.BasicExamples.SaturatedInductor;
       annotation (experiment(StopTime=0.1, Tolerance=1e-07));
     end SimpleMagneticCircuit;
 
      model CompareSaturationEffects
       "Inductor with saturation in the ferromagnetic core"
-      extends Modelica.Magnetic.FluxTubes.Examples.SaturatedInductor;
+      extends Modelica.Magnetic.FluxTubes.Examples.BasicExamples.SaturatedInductor;
 
       Modelica.Magnetic.FluxTubes.Basic.Ground ground_m1
                                                         annotation (Placement(
@@ -67,12 +67,12 @@ package TSE3080Models
         annotation (Line(points={{-80,-44},{-61,-44}},
                                                    color={0,0,255}));
       connect(r1.n, coil1.p)
-        annotation (Line(points={{-41,-44},{-30,-44},{-30,-48}},
+        annotation (Line(points={{-41,-44},{-30,-44},{-30,-44}},
                                                             color={0,0,255}));
-      connect(source1.n, coil1.n) annotation (Line(points={{-80,-64},{-30,-64},{-30,
-              -60}},      color={0,0,255}));
+      connect(source1.n, coil1.n) annotation (Line(points={{-80,-64},{-30,-64},{-30,-64}},
+                          color={0,0,255}));
       connect(coil1.port_p, r_mLeak1.port_p)
-        annotation (Line(points={{-10,-48},{-10,-44},{10,-44}},
+        annotation (Line(points={{-10,-44},{-10,-44},{10,-44}},
                                                            color={255,127,0}));
       connect(r_mLeak1.port_p, r_mAirPar1.port_p)
         annotation (Line(points={{10,-44},{26,-44}},
@@ -82,8 +82,8 @@ package TSE3080Models
                                                         color={255,127,0}));
       connect(r_mFe1.port_n, r_mLeak1.port_n) annotation (Line(points={{60,-64},{47.5,
               -64},{35,-64},{10,-64}},       color={255,127,0}));
-      connect(r_mFe1.port_n, coil1.port_n) annotation (Line(points={{60,-64},{-10,-64},
-              {-10,-60}},          color={255,127,0}));
+      connect(r_mFe1.port_n, coil1.port_n) annotation (Line(points={{60,-64},{-10,-64},{-10,-64}},
+                                   color={255,127,0}));
       connect(ground1.p, source1.n) annotation (Line(
           points={{-80,-74},{-80,-64}},
           color={0,0,255},
@@ -643,12 +643,12 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
 
     model ASM_SlipRingStart
       extends
-        Modelica.Electrical.Machines.Examples.AsynchronousInductionMachines.AIMS_Start;
+        Modelica.Electrical.Machines.Examples.InductionMachines.IMS_Start;
     end ASM_SlipRingStart;
 
     model ASM_DirectStart
       extends
-        Modelica.Electrical.Machines.Examples.AsynchronousInductionMachines.AIMC_YD(
+        Modelica.Electrical.Machines.Examples.InductionMachines.IMC_YD(
           booleanStepYD(startTime=0), loadInertia(J=3));
       annotation (experiment(StopTime=20, __Dymola_NumberOfIntervals=50000),
                                             __Dymola_experimentSetupOutput,
@@ -657,7 +657,7 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
 
     model ASM_YDStart
       extends
-        Modelica.Electrical.Machines.Examples.AsynchronousInductionMachines.AIMC_YD(
+        Modelica.Electrical.Machines.Examples.InductionMachines.IMC_YD(
           booleanStepYD(each startTime=15),
                                        loadInertia(J=3));
       annotation (experiment(StopTime=20, __Dymola_NumberOfIntervals=50000),
@@ -831,7 +831,7 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
 
     model SMEE_Generator
       extends
-        Modelica.Electrical.Machines.Examples.SynchronousInductionMachines.SMEE_Generator;
+        Modelica.Electrical.Machines.Examples.SynchronousMachines.SMEE_Generator;
     end SMEE_Generator;
 
     model SMEE_ShortCircuit
@@ -1110,7 +1110,7 @@ One could try to optimize the controller parameters.
     end SMEE_ShortCircuit;
 
     model SMEE_DOL
-      extends Modelica.Electrical.Machines.Examples.SynchronousInductionMachines.SMEE_DOL(torqueStep(offsetTorque=1));
+      extends Modelica.Electrical.Machines.Examples.SynchronousMachines.SMEE_DOL(torqueStep(offsetTorque=1));
     end SMEE_DOL;
   end SM;
 
@@ -1162,7 +1162,7 @@ One could try to optimize the controller parameters.
 
     model AIMC_Steinmetz
       extends
-        Modelica.Electrical.Machines.Examples.AsynchronousInductionMachines.AIMC_Steinmetz;
+        Modelica.Electrical.Machines.Examples.InductionMachines.IMC_Steinmetz;
     end AIMC_Steinmetz;
   end SinglePhase;
 
