@@ -1,7 +1,8 @@
 within ;
 package TSE3080Models
+  extends Modelica.Icons.Package;
   package Transformer "Examples used during the transformer lectures"
-
+    extends Modelica.Icons.Package;
     model SimpleMagneticCircuit
       extends Modelica.Magnetic.FluxTubes.Examples.BasicExamples.SaturatedInductor;
       annotation (experiment(StopTime=0.1, Tolerance=1e-07));
@@ -414,9 +415,22 @@ In some cases it may be necessary to ground the transformer's starpoint even tho
 </html>"),
          experiment(StopTime=0.1, Interval=0.001));
     end AsymmetricalLoad;
+                         annotation (
+      Icon(graphics={  Polygon(origin = {10, 10}, fillColor = {135, 135, 135}, fillPattern = FillPattern.VerticalCylinder, points = {{60, 50}, {40, 30}, {40, -50}, {60, -70}, {60, 50}}),                                                                                                                                                                                                        Rectangle(origin = {10, 10}, lineColor = {128, 0, 255}, fillColor = {128, 0, 255},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, extent = {{32, -46}, {68, 26}}),
+                                                                                                                                                                                                        Polygon(origin = {10, 10}, fillColor = {135, 135, 135},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, points = {{-10, 40}, {-20, 30}, {-20, -50}, {-10, -60}, {0, -50}, {0, 30}, {-10, 40}}),                                                                                                                                                                                                        Rectangle(origin = {10, 8}, lineColor = {128, 0, 255}, fillColor = {128, 0, 255},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, extent = {{-28, -46}, {8, 26}}),
+                                                                                                                                                                                           Polygon(origin = {10, 10}, fillColor = {135, 135, 135}, fillPattern = FillPattern.VerticalCylinder, points = {{-80, 50}, {60, 50}, {40, 30}, {0, 30}, {-10, 40}, {-20, 30}, {-60, 30}, {-80, 50}}), Rectangle(origin = {10, 10}, lineColor = {0, 128, 255}, fillColor = {0, 128, 255}, fillPattern = FillPattern.VerticalCylinder, extent = {{26, -38}, {74, 18}}), Polygon(origin = {10, 10}, fillColor = {135, 135, 135},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, points = {{-80, 50}, {-60, 30}, {-60, -50}, {-80, -70}, {-80, 50}}), Polygon(origin = {10, 10}, fillColor = {135, 135, 135},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, points = {{-80, -70}, {60, -70}, {40, -50}, {0, -50}, {-10, -60}, {-20, -50}, {-60, -50}, {-80, -70}}), Rectangle(origin = {10, 10}, lineColor = {0, 128, 255}, fillColor = {0, 128, 255},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, extent = {{-34, -38}, {14, 18}}), Rectangle(origin = {10, 10}, lineColor = {128, 0, 255}, fillColor = {128, 0, 255},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, extent = {{-88, -46}, {-52, 26}}),                                                                                                                                                                                             Rectangle(origin = {10, 12}, lineColor = {0, 128, 255}, fillColor = {0, 128, 255},
+              fillPattern =                                                                                                                                                                                                        FillPattern.VerticalCylinder, extent = {{-94, -38}, {-46, 18}})}));
   end Transformer;
 
   package ASM
+    extends Modelica.Icons.Package;
     model AIMC_DOL_SlipCalculation
       extends AIMC_DOL(fNominal=60, aimc(p=3));
       Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed(displayUnit="rpm") = 52.35987755983) annotation (Placement(transformation(extent={{90,-50},{70,-30}})));
@@ -642,27 +656,21 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
     end AIMC_TorqueChar;
 
     model ASM_SlipRingStart
-      extends
-        Modelica.Electrical.Machines.Examples.InductionMachines.IMS_Start;
+      extends Modelica.Electrical.Machines.Examples.InductionMachines.IMS_Start;
     end ASM_SlipRingStart;
 
     model ASM_DirectStart
-      extends
-        Modelica.Electrical.Machines.Examples.InductionMachines.IMC_YD(
-          booleanStepYD(startTime=0), loadInertia(J=3));
-      annotation (experiment(StopTime=20, __Dymola_NumberOfIntervals=50000),
-                                            __Dymola_experimentSetupOutput,
-        Commands(file="plotResults.mos" "plotResults"));
+      extends Modelica.Electrical.Machines.Examples.InductionMachines.IMC_YD(booleanStepYD.startTime = {0, 0, 0});
+      annotation (
+      //experiment(StopTime=20, Interval=1E-4),
+       Commands(file = "plotResults.mos" "plotResults"),
+        experiment(StartTime = 0, StopTime = 2.5, Tolerance = 1e-6, Interval = 0.0001));
     end ASM_DirectStart;
 
     model ASM_YDStart
-      extends
-        Modelica.Electrical.Machines.Examples.InductionMachines.IMC_YD(
-          booleanStepYD(each startTime=15),
-                                       loadInertia(J=3));
-      annotation (experiment(StopTime=20, __Dymola_NumberOfIntervals=50000),
-                                            __Dymola_experimentSetupOutput,
-        Commands(file="plotResultsYD.mos" "plotResults"));
+  extends Modelica.Electrical.Machines.Examples.InductionMachines.IMC_YD;
+      annotation(
+        experiment(StartTime = 0, StopTime = 2.5, Tolerance = 1e-6, Interval = 0.0001));
     end ASM_YDStart;
 
     model AIMC_Generator "Torque characteristic of a ASM"
@@ -770,7 +778,7 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},{100,
                 100}})),
-        experiment(StopTime=3, Interval=0.001),
+        experiment(StopTime=3, Interval=0.001, StartTime = 0, Tolerance = 1e-06),
         Documentation(info="<HTML>
 <b>1st Test example: Asynchronous induction machine with squirrel cage - direct on line starting</b><br>
 At start time tStart three phase voltage is supplied to the asynchronous induction machine with squirrel cage;
@@ -784,9 +792,14 @@ Simulate for 1.5 seconds and plot (versus time):
 Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
 </HTML>"));
     end AIMC_Generator;
+                       annotation (
+      Icon(graphics={  Rectangle(origin = {2.835, 10}, fillColor = {0, 128, 255}, fillPattern = FillPattern.HorizontalCylinder, extent = {{-60, -60}, {60, 60}}), Rectangle(origin = {2.835, 10}, lineColor = {95, 95, 95}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid, extent = {{-60, 50}, {20, 70}}), Polygon(origin = {2.835, 10}, fillPattern = FillPattern.Solid, points = {{-70, -90}, {-60, -90}, {-30, -20}, {20, -20}, {50, -90}, {60, -90}, {60, -100}, {-70, -100}, {-70, -90}}), Rectangle(origin = {2.835, 10}, fillColor = {95, 95, 95},
+              fillPattern =                                                                                                                                                                                                        FillPattern.HorizontalCylinder, extent = {{60, -10}, {80, 10}}), Rectangle(origin = {2.835, 10}, fillColor = {128, 128, 128},
+              fillPattern =                                                                                                                                                                                                        FillPattern.HorizontalCylinder, extent = {{-80, -60}, {-60, 60}})}));
   end ASM;
 
   package SM
+    extends Modelica.Icons.Package;
     model EqvSM
     extends Modelica.Icons.Example;
       Modelica.Electrical.Analog.Sources.SineVoltage E0(f=50, V=230) annotation (Placement(transformation(
@@ -830,8 +843,7 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
     end EqvSM;
 
     model SMEE_Generator
-      extends
-        Modelica.Electrical.Machines.Examples.SynchronousMachines.SMEE_Generator;
+      extends Modelica.Electrical.Machines.Examples.SynchronousMachines.SMEE_Generator;
     end SMEE_Generator;
 
     model SMEE_ShortCircuit
@@ -1112,10 +1124,27 @@ One could try to optimize the controller parameters.
     model SMEE_DOL
       extends Modelica.Electrical.Machines.Examples.SynchronousMachines.SMEE_DOL(torqueStep(offsetTorque=1));
     end SMEE_DOL;
+    annotation (Icon(graphics={
+          Rectangle(
+            lineColor={200,200,200},
+            fillColor={248,248,248},
+            fillPattern=FillPattern.HorizontalCylinder,
+            extent={{-100.0,-100.0},{100.0,100.0}},
+            radius=25.0),
+          Rectangle(
+            lineColor={128,128,128},
+            extent={{-100.0,-100.0},{100.0,100.0}},
+            radius=25.0),
+                       Rectangle(origin = {2.835, 10}, fillColor={162,29,33},     fillPattern=FillPattern.HorizontalCylinder,   extent = {{-60, -60}, {60, 60}},
+            lineColor={0,0,0}),                                                                                                                                   Rectangle(origin = {2.835, 10}, lineColor = {95, 95, 95}, fillColor = {95, 95, 95}, fillPattern = FillPattern.Solid, extent = {{-60, 50}, {20, 70}}), Polygon(origin = {2.835, 10}, fillPattern = FillPattern.Solid, points = {{-70, -90}, {-60, -90}, {-30, -20}, {20, -20}, {50, -90}, {60, -90}, {60, -100}, {-70, -100}, {-70, -90}}), Rectangle(origin = {2.835, 10}, fillColor = {95, 95, 95},
+              fillPattern =                                                                                                                                                                                                        FillPattern.HorizontalCylinder, extent = {{60, -10}, {80, 10}}), Rectangle(origin = {2.835, 10}, fillColor = {128, 128, 128},
+              fillPattern =                                                                                                                                                                                                        FillPattern.HorizontalCylinder, extent = {{-80, -60}, {-60, 60}})}));
   end SM;
 
   package SinglePhase
+    extends Modelica.Icons.Package;
     model RevolvingMMFs
+      extends Modelica.Icons.Example;
       Modelica.Blocks.Sources.Sine sine1(
         amplitude=85,
         f=0.5,
@@ -1161,12 +1190,21 @@ One could try to optimize the controller parameters.
     end RevolvingMMFs;
 
     model AIMC_Steinmetz
-      extends
-        Modelica.Electrical.Machines.Examples.InductionMachines.IMC_Steinmetz;
+      extends Modelica.Electrical.Machines.Examples.InductionMachines.IMC_Steinmetz;
     end AIMC_Steinmetz;
+    annotation (Icon(graphics={
+                             Line(
+          origin={10,20},
+          points={{-90,-20},{-78.7,14.2},{-71.5,33.1},{-65.1,46.4},{-59.4,54.6},{
+              -53.8,59.1},{-48.2,59.8},{-42.6,56.6},{-36.9,49.7},{-31.3,39.4},{-24.9,
+              24.1},{-16.83,1.2},{0.1,-50.8},{7.3,-70.2},{13.7,-84.2},{19.3,-93.1},
+              {25,-98.4},{30.6,-100},{36.2,-97.6},{41.9,-91.5},{47.5,-81.9},{53.9,
+              -67.2},{62,-44.8},{70,-20}},
+          smooth=Smooth.Bezier)}));
   end SinglePhase;
 
   package DC
+    extends Modelica.Icons.Package;
     model DCEE_Start
       "Test example: DC with electrical ecxitation starting with voltage ramp"
       extends Modelica.Icons.Example;
@@ -1224,8 +1262,8 @@ One could try to optimize the controller parameters.
               rotation=0)));
     equation
       connect(armature.y, signalVoltage.v)
-                                         annotation (Line(points={{-59,70},{-10,
-              70},{-10,47}}, color={0,0,255}));
+                                         annotation (Line(points={{-59,70},{-10,70},{-10,52}},
+                             color={0,0,255}));
       connect(signalVoltage.p, dcee.pin_ap)   annotation (Line(points={{
               5.55112e-16,40},{5.55112e-16,-20},{-4,-20},{-4,-30}},
                                          color={0,0,255}));
@@ -1248,7 +1286,7 @@ One could try to optimize the controller parameters.
           color={0,0,0},
           smooth=Smooth.None));
       connect(field.y, fieldExcitation.v) annotation (Line(
-          points={{-59,-40},{-47,-40}},
+          points={{-59,-40},{-52,-40}},
           color={0,0,127},
           smooth=Smooth.None));
       annotation (
@@ -1273,6 +1311,12 @@ One could try to optimize the controller parameters.
 </html>"),
         __Dymola_experimentSetupOutput);
     end DCEE_Start;
+    annotation (Icon(graphics={Line(points={{-60,32},{60,32}}, color={0,0,0}),
+                               Line(points={{-60,-30},{60,-30}},
+                                                               color={0,0,0})}));
   end DC;
-annotation (uses(Modelica(version="4.0.0")));
+annotation (uses(Modelica(version="4.0.0")), Icon(graphics={Text(
+          extent={{-80,80},{80,-80}},
+          lineColor={0,0,0},
+          textString="USN")}));
 end TSE3080Models;
