@@ -1,0 +1,11 @@
+# Electrical Machine Control Laboratory
+# Python Requirements
+
+# Core dependencies
+numpy>=1.20.0
+matplotlib>=3.3.0
+
+# Optional for enhanced plotting
+scipy>=1.6.0
+
+# Python 3.7+ required for Tkinter (usually included in Python standard library)
