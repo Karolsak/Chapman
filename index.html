@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symulator Generatora Synchronicznego - Strona Główna</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .intro {
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #667eea;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .card .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        .features {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .features h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .features li:before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        .specs {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .specs h4 {
+            color: #1976d2;
+            margin-bottom: 15px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .specs-grid div {
+            padding: 8px;
+            background: white;
+            border-radius: 5px;
+        }
+
+        .specs-grid strong {
+            color: #667eea;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+
+        .comparison {
+            margin: 30px 0;
+        }
+
+        .comparison table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison tr:hover {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Symulator Generatora Synchronicznego ⚡</h1>
+            <p>Generator Trójfazowy 200 MVA, 16 kV - Analiza Dynamiczna z ODE</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>Witaj w Symulatorze!</h2>
+                <p>
+                    Zaawansowane narzędzie do analizy pracy generatora synchronicznego trójfazowego.
+                    Rozwiązuje kompletne zadanie z zakresu maszyn elektrycznych, zawierające obliczenia
+                    prądu, mocy, współczynnika mocy oraz symulację dynamiczną przy użyciu równania wahań.
+                </p>
+            </div>
+
+            <div class="specs">
+                <h4>📊 Dane Generatora</h4>
+                <div class="specs-grid">
+                    <div><strong>Moc znamionowa:</strong> 200 MVA</div>
+                    <div><strong>Napięcie:</strong> 16 kV (L-L)</div>
+                    <div><strong>Reaktancja Xs:</strong> 1.60 p.u.</div>
+                    <div><strong>Rezystancja:</strong> ≈ 0 (pomijalna)</div>
+                    <div><strong>Napięcie szyn:</strong> 15 kV</div>
+                    <div><strong>SEM wewnętrzna:</strong> 24 kV</div>
+                    <div><strong>Kąt mocy:</strong> δ = 25°</div>
+                    <div><strong>Prąd bazowy:</strong> 7.217 kA</div>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin-bottom: 20px; text-align: center;">
+                Wybierz Wersję Symulatora:
+            </h3>
+
+            <div class="cards">
+                <a href="synchronous_generator_simulator.html" class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>Wersja HTML</h3>
+                    <p>
+                        Pełna aplikacja webowa działająca w przeglądarce. Nie wymaga instalacji,
+                        działa natychmiast na każdym urządzeniu.
+                    </p>
+                    <span class="badge">ZALECANE</span>
+                    <span class="badge">BEZ INSTALACJI</span>
+                </a>
+
+                <a href="#" onclick="alert('Uruchom: python3 synchronous_generator_simulator.py'); return false;" class="card">
+                    <div class="card-icon">🐍</div>
+                    <h3>Wersja Python</h3>
+                    <p>
+                        Aplikacja Tkinter z identyczną funkcjonalnością. Wymaga Python 3
+                        oraz bibliotek numpy, scipy, matplotlib.
+                    </p>
+                    <span class="badge">PYTHON 3.6+</span>
+                </a>
+            </div>
+
+            <div class="features">
+                <h3>✨ Funkcje Symulatora</h3>
+                <ul>
+                    <li><strong>Automatyczne obliczenia</strong> - rozwiązanie wszystkich części zadania (a-d)</li>
+                    <li><strong>Interaktywne suwaki</strong> - zmiana parametrów w czasie rzeczywistym</li>
+                    <li><strong>Symulacja ODE</strong> - równanie wahań z solverami RK45 i Euler</li>
+                    <li><strong>Wykresy dynamiczne</strong> - charakterystyki moc-kąt, diagramy fazorowe</li>
+                    <li><strong>Animacje</strong> - wizualizacja zmian w czasie z odtwarzaniem</li>
+                    <li><strong>Responsywny design</strong> - działa na desktop, tablet i smartphone</li>
+                    <li><strong>Zweryfikowane wyniki</strong> - dokładność potwierdzona obliczeniami</li>
+                </ul>
+            </div>
+
+            <div class="comparison">
+                <h3 style="color: #667eea; margin-bottom: 15px;">📊 Porównanie Wersji</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Funkcja</th>
+                            <th>HTML</th>
+                            <th>Python</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Instalacja</strong></td>
+                            <td>❌ Nie wymagana</td>
+                            <td>✅ Python + biblioteki</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Czas uruchomienia</strong></td>
+                            <td>⚡ Natychmiastowy</td>
+                            <td>⏱️ 2-3 sekundy</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dokładność obliczeń</strong></td>
+                            <td>✅ Identyczna</td>
+                            <td>✅ Identyczna</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interfejs użytkownika</strong></td>
+                            <td>🎨 Nowoczesny gradient</td>
+                            <td>📊 Tkinter standard</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wykresy</strong></td>
+                            <td>📈 Plotly (zoom, pan)</td>
+                            <td>📊 Matplotlib</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Przenośność</strong></td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Offline</strong></td>
+                            <td>✅ Tak*</td>
+                            <td>✅ Tak</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                    * Po pierwszym załadowaniu Plotly.js
+                </p>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="synchronous_generator_simulator.html" class="btn-primary">
+                    🚀 Uruchom Wersję HTML
+                </a>
+                <br>
+                <p style="margin-top: 15px; color: #666; font-size: 14px;">
+                    lub zobacz:
+                    <a href="README_HTML.md" style="color: #667eea;">Pełna dokumentacja</a> |
+                    <a href="QUICK_START_HTML.md" style="color: #667eea;">Szybki start</a>
+                </p>
+            </div>
+
+            <div style="background: #fff3cd; padding: 20px; border-radius: 10px; border-left: 5px solid #ffc107;">
+                <h4 style="color: #856404; margin-bottom: 10px;">💡 Wskazówka dla początkujących:</h4>
+                <p style="color: #856404; line-height: 1.6;">
+                    Jeśli dopiero zaczynasz, wybierz <strong>wersję HTML</strong>. Nie wymaga żadnej instalacji
+                    - po prostu kliknij link powyżej i od razu zacznij eksplorować symulator. Możesz
+                    natychmiast zobaczyć wyniki, zmieniać parametry suwakami i obserwować efekty!
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <strong>Symulator Generatora Synchronicznego</strong><br>
+                Wersja 1.0.0 | 2025<br>
+                Narzędzie edukacyjne do analizy maszyn elektrycznych
+            </p>
+        </div>
+    </div>
+</body>
+</html>
